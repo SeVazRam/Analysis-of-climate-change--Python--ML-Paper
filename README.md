@@ -60,11 +60,9 @@ TF = T1 + phi
 It is important to note that to make these calculations all the variables are in degrees Kelvin, with this we can calculate
 the temperatures per year and compare it with the results of the dataset.
 
-#######################################################
-######################################################
-Datasets
-######################################################
-########################################################
+#############
+##Datasets##
+#############
 
 The data compilation by Berkeley records Land Average temperatures in the format yyyy/mm/dd. So, a split was made by year, 
 month, and day taking the temperature of each month, and the mean temperature per year was computed. It is observed that 
@@ -85,3 +83,6 @@ there is a correlation with a value of 0.89 between the variables of the year an
 #############
 
 In the notebooks, an Exploratory Data Analysis of the data set is carried out, to later make a comparison through machine learning techniques.
+
+FOR MORE INFORMATION CHECK OUR PAPER "Analysis of climate change based on machine learning and
+endoreversible modeL"
