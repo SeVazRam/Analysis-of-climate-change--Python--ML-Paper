@@ -1,88 +1,57 @@
-# Analysis-of-climate-change-based-on-machine-learning-and-endoreversible-model
-To analyze the complexity of climate change, the planet's land and ocean temperatures are measured. 
-This repository will make an analysis of the future terrestrial temperatures analyzed by a thermodynamic modeling of finite times. 
-To analyze global warming, the theoretically obtained data was compared with experimental data. 
+# Analysis of Climate Change Based on Machine Learning and Endoreversible Model
 
-#######################################################
-######################################################
-Numerical Solution of Heat Engine (Wolfram Language )
-######################################################
-########################################################
+## Description
+This project analyzes global climate change through a hybrid approach that combines finite-time thermodynamic modeling with machine learning techniques. 
+The focus is on forecasting terrestrial temperature trends by integrating physical models with data-driven predictions.
 
-The following program in Wolfram Language presents the numerical solution
-of a Gordon and Zarmi type thermodynamic model that represents a 
-Sun-Earth-Wind system as a heat Engine.
+## Methodology
+We model the Earth-Sun-Wind system as a thermodynamic heat engine based on a Gordon-Zarmi framework.  
+The system's behavior is characterized by:
+- Non-endoreversible parameters (R)
+- Greenhouse effect parameter (γ)
+- Albedo parameter (ρ)
+- Solar radiation flux (q)
 
-#############
-##Variables##
-#############
+A set of thermodynamic equations is numerically solved using Wolfram Language to estimate the Earth's upper and lower atmospheric layer temperatures under maximum power conditions.  
+Theoretical temperatures are then compared against observed data from historical records.
 
-t0 = 4.6 10^(9); #Time
-\[Sigma] = 5.67 10^(-8); #Stefan–Boltzmann constant
-R = 1; #Nonendoreversibility parameter
-\[Gamma] = 0.537099021; #greenhouse parameter
-\[Rho] = 0.461772791; #albedo parameter
+**Machine Learning Techniques Applied:**
+- Linear Regression (LR)
+- Ridge Regression (RR)
+- Artificial Neural Networks (ANN)
 
-S = (1 + 0.4 (1 - (2079 + t0)/t0))^-1 I0; # luminosity of the Sun
-q = (S*(1 - \[Rho]))/4; # average solar radiation flux q per area
+These models are trained on historical land average temperature data to forecast future temperatures up to the year 2100.
 
-#############
-##Equations##
-#############
-We have two equations whose numerical solution provides the highest and lowest layer surface temperatures. 
-The low of the Earth's atmosphere under a regime of maximum power in terms of the non-endo reversibility parameter R,
-the albedo $\rho$, the greenhouse effect $\gamma$, and the current solar constant $I_sc$.
+## Data
+Datasets used:
+- `GlobalTemperaturesGZ.csv`: contains observed temperatures and model-generated temperature predictions using LR, RR, and ANN.
+- `FinalGraphTemp.csv`: stores final processed data for plotting and evaluation.
 
+The dataset from Berkeley Earth records monthly average land temperatures, which were aggregated to annual means for the analysis.  
+A strong correlation (r = 0.89) was observed between the year and land average temperature from 1975 to 2015.
 
-ap = T_1^{5}-T_{2}T_1^{4}-\frac{2\bar{q_s}}{3R\sigma(1-\gamma)}T_2=0
+## How to Run
+1. Clone this repository.
+2. Navigate to the `/notebooks` folder.
+3. Open and run:
+   - `EDA_climate.ipynb` for exploratory data analysis.
+   - `model_training.ipynb` for machine learning training and forecasting.
+4. Review the comparison between theoretical and machine learning-based temperature projections.
 
-bp = T_{1}^4+\frac{1}{(1-\gamma)}T_{2}^3T_{1}
--\frac{\bar 2q_s}{R\sigma (1-\gamma)}
+> **Note:** All thermodynamic calculations are performed in Kelvin units.
 
-#############
-##Solution##
-#############
+## Results
+- Thermodynamic models successfully predict terrestrial temperature evolution considering finite-time constraints.
+- Machine learning models achieve high predictive accuracy when compared to experimental data.
+- Forecasts show projected temperature trends up to 2100 under different modeling strategies.
 
-sol = Solve[{ap == 0, bp == 0}, {T_1, T_2}];
+## Paper Reference
+For a detailed scientific discussion, please refer to our paper:  
+**"Analysis of Climate Change Based on Machine Learning and Endoreversible Model"**  
+(Available at: [Preprints Link](https://www.preprints.org/manuscript/202306.1197))
 
-Only the real and positive solutions should be taken, then it is necessary to consider the dissipation with the following equations
+## Contact
+Author: **Sebastián Vázquez Ramírez**  
+Email: sebas.vaz.ra@gmail.com  
+GitHub: [github.com/SeVazRam](https://github.com/SeVazRam)
 
-T1 = 306.296
-T2 = 199.782
-n = 1 - Sqrt[(T2/T1)]^(0.5)
-Q1 = (T1 - T2 - T1*n)/1 - n
-a = T1*(1 - n) - T2
-b = (1 - n)*T1 + T2
-Q2 = T2*(a/b)
-phi = Q2 - (T2/T1)*Q1
-TF = T1 + phi
-
-It is important to note that to make these calculations all the variables are in degrees Kelvin, with this we can calculate
-the temperatures per year and compare it with the results of the dataset.
-
-#############
-##Datasets##
-#############
-
-The data compilation by Berkeley records Land Average temperatures in the format yyyy/mm/dd. So, a split was made by year, 
-month, and day taking the temperature of each month, and the mean temperature per year was computed. It is observed that 
-there is a correlation with a value of 0.89 between the variables of the year and the Land Average Temperature from the year 1975 to 2015 
-
-1.- GlobalTemperaturesGZ.csv.
-
- Table presents the future prediction of the temperatures using linear regression (LR), Ridge Regression (RR), and Artificial Neural Networks (ANN). 
- All techniques were applied to the observed temperatures (Tobs) and the models’ temperatures used in the present work. In the same way, the third column 
- shows the temperatures calculated (Ts) from our model of Gordon and Zarmi (GZM) without applying a linear regression, where the physical characteristics 
- of the atmosphere are taken into account and what theoretical temperature would be reached. In addition, Table depicts the entire prediction made up to 2100, 
- starting in 2016
-
-2.- FinalGraphTemp.csv
-
-#############
-##Notebooks##
-#############
-
-In the notebooks, an Exploratory Data Analysis of the data set is carried out, to later make a comparison through machine learning techniques.
-
-FOR MORE INFORMATION CHECK OUR PAPER "Analysis of climate change based on machine learning and
-endoreversible modeL"
